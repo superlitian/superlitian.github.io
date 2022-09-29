@@ -1,0 +1,10 @@
+{
+ "compilerOptions": {
+  "baseUrl": ".",
+  "paths": {
+   "*": [
+    "../../../../var/folders/q2/b477txsn2s35t396ycrkx9y00000gp/T/hugo_cache/modules/filecache/modules/pkg/mod/github.com/!cai!jimmy/hugo-theme-stack/v4@v4.0.0-alpha.0/assets/*"
+   ]
+  }
+ }
+}
