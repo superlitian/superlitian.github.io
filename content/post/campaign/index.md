@@ -343,7 +343,7 @@ library SafeMath {
 
 #### 编译
 
-**`solc --abi --bin ./short_content.sol -o build`**
+**`solc --abi --bin ./campaign.sol -o build`**
 
 #### 部署
 
