@@ -2,7 +2,7 @@
 mainSections = ["post"]
 # Output page's full content in RSS.
 rssFullContent = true
-favicon = "me.ico"
+favicon = "favicon.ico"
 
 [footer]
 since = 2020
@@ -13,8 +13,8 @@ published = "Jan 02, 2006"
 lastUpdated = "Jan 02, 2006 15:04 MST"
 
 [sidebar]
-emoji = "🏍"
-subtitle = "一个好人，想去看看倒悬山🙈"
+emoji = "😩"
+subtitle = "想找一份稳定的工作。"
 
 [sidebar.avatar]
 enabled = true
