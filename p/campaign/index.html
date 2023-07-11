@@ -1,0 +1,1351 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="一个竞选学生会主席场景的智能合约"><title>提案投票合约</title><link rel=canonical href=https://superlitian.github.io/p/campaign/><link rel=stylesheet href=/scss/style.min.2a426798c147941971a3556278c8cfb14775867d8c34a1f67a6827752a1b4bd5.css><meta property="og:title" content="提案投票合约"><meta property="og:description" content="一个竞选学生会主席场景的智能合约"><meta property="og:url" content="https://superlitian.github.io/p/campaign/"><meta property="og:site_name" content="Laertes"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="Solidity"><meta property="article:published_time" content="2022-09-28T00:00:00+00:00"><meta property="article:modified_time" content="2022-09-28T00:00:00+00:00"><meta property="og:image" content="https://superlitian.github.io/p/campaign/header.jpg"><meta name=twitter:title content="提案投票合约"><meta name=twitter:description content="一个竞选学生会主席场景的智能合约"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://superlitian.github.io/p/campaign/header.jpg"><link rel="shortcut icon" href=/favicon.ico></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/avatar_hufe0ee12878b7caa9845abd9976ff67a8_90270_300x0_resize_q75_box.jpg width=300 height=300 class=site-logo loading=lazy alt=Avatar></a>
+<span class=emoji>😩</span></figure><div class=site-meta><h1 class=site-name><a href=/>Laertes</a></h1><h2 class=site-description>想找一份稳定的工作。</h2></div></header><ol class=social-menu><li><a href=https://github.com/superlitian target=_blank title=GitHub><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/campaign/><img src=/p/campaign/header_hud30b7d800d6a863e0643d87b3a87316b_148688_800x0_resize_q75_box.jpg srcset="/p/campaign/header_hud30b7d800d6a863e0643d87b3a87316b_148688_800x0_resize_q75_box.jpg 800w, /p/campaign/header_hud30b7d800d6a863e0643d87b3a87316b_148688_1600x0_resize_q75_box.jpg 1600w" width=800 height=450 loading=lazy alt="Featured image of post 提案投票合约"></a></div><div class=article-details><header class=article-category><a href=/categories/contract/>Contract</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/campaign/>提案投票合约</a></h2><h3 class=article-subtitle>一个竞选学生会主席场景的智能合约</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Sep 28, 2022</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 12 分钟</time></div></footer></div></header><section class=article-content><h3 id=合约介绍>合约介绍</h3><h4 id=场景介绍>场景介绍</h4><p>campaign 合约，实现场景为学生会主席竞选流程。</p><h4 id=流程介绍>流程介绍</h4><ol><li>合约初始化时，指定具有owner权限的账户，该账户具有检票与提名候选人以及启动竞选提案的权利。</li><li>启动竞选提案，需要提名一位候选人，并指定提案通过票数阈值，更新提案状态为投票中，返回该次提案ID。</li><li>任何人都可以根据提案ID查询该提案的状态。</li><li>当提案状态为投票中，任何人可以调用投票功能进行投票，限投一人一票，重复投票不会生效。</li><li>当票数大于启动提案时设置的阈值，提案状态为待检票，owner 可启动检票。</li><li>检票会进行身份验证，只有owner账户可以成功调用。</li><li>检票通过后，提案流程结束，提案状态置为已生效，此时任何人都可以查询当前学生会主席信息。</li><li>当提案状态为未启动、已生效、待检票时，不可使用投票功能。</li><li>任何人都可根据提案ID查询该提案的候选人信息。</li></ol><h4 id=功能介绍>功能介绍</h4><h5 id=constructor>constructor</h5><ul><li>Params:<ul><li>owner:<ul><li>type: address</li><li>desc: owner权限设置</li></ul></li></ul></li><li>Desc: 设置owner权限账户，初始化提案状态</li></ul><h5 id=propose>propose</h5><ul><li>Params:<ul><li>candidate:<ul><li>type: string</li><li>desc: 候选人</li></ul></li><li>target:<ul><li>type: uint256</li><li>desc: 票数阈值</li></ul></li></ul></li><li>Returns:<ul><li>proposalId:<ul><li>type: uint256</li><li>desc: 提案ID</li></ul></li></ul></li><li>Desc: 启动竞选提案</li></ul><h5 id=queryproposal>queryProposal</h5><ul><li><p>Params:</p><ul><li>proposalId:<ul><li>type: uint256</li><li>desc: 提案ID</li></ul></li></ul></li><li><p>Returns:</p><ul><li>status:<ul><li>type: string</li><li>desc: 提案状态：未启动(stoped)、投票中(voting)、待检票(passed)、已生效(completed)</li></ul></li></ul></li><li><p>Desc: 查询提案状态</p></li></ul><h5 id=vote>vote</h5><ul><li><p>Params:</p><ul><li>proposalId:<ul><li>type: uint256</li><li>desc: 提案ID</li></ul></li></ul></li><li><p>Retruns:</p><ul><li>status:<ul><li>type: string</li><li>desc: 投票状态：&ldquo;success&rdquo; or &ldquo;error&rdquo;，error需给出原因</li></ul></li></ul></li><li><p>Desc: 进行投票，调用该方法，视为调用者进行投票一次</p></li></ul><h5 id=queryvotes>queryVotes</h5><ul><li><p>Params:</p><ul><li>proposalId:<ul><li>type: uint256</li><li>desc: 提案ID</li></ul></li></ul></li><li><p>Returns:</p><ul><li>votes:<ul><li>type: uint256</li><li>desc: 当前所获票数，当状态为未启动时，应为0</li></ul></li></ul></li><li><p>Desc: 查询已经获取的票数</p></li></ul><h5 id=check>check</h5><ul><li><p>Params:</p><ul><li>proposalId:<ul><li>type: uint256</li><li>desc: 提案ID</li></ul></li></ul></li><li><p>Returns:</p><ul><li>status:<ul><li>type: string</li><li>desc: 检票状态：&ldquo;success&rdquo; or &ldquo;error&rdquo;，error需给出原因</li></ul></li></ul></li><li><p>Desc: 启动检票</p></li></ul><h5 id=querypresident>queryPresident</h5><ul><li>Returns:<ul><li>president:<ul><li>type: string</li><li>desc: 竞选成功的候选人</li></ul></li></ul></li><li>Desc: 查询学生会主席信息</li></ul><h5 id=querycandidate>queryCandidate</h5><ul><li>Params:<ul><li>proposalId:<ul><li>type: uint256</li><li>desc: 提案ID</li></ul></li></ul></li><li>Returns:<ul><li>candidate:<ul><li>type: string</li><li>desc: 提案候选人信息</li></ul></li></ul></li><li>Desc: 查询提案候选人信息</li></ul><h3 id=合约设计>合约设计</h3><blockquote><p>SafeMath 可提供。</p></blockquote><div class=codeblock><header><span class=codeblock-lang>solidity</span>
+<button class=codeblock-copy data-id=codeblock-id-0 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-0 style=display:none>// SPDX-License-Identifier: SimPL-2.0
+pragma solidity ^0.8.0;
+contract campaign{
+// 为 uint256 类型使用 SafeMath 库
+using SafeMath for uint256;
+// owner 账户
+address _owner;
+// 学生会主席
+string _president;
+// 提案候选人
+mapping(uint256 => string) _candidate;
+// 提案票数
+mapping(uint256 => uint256) _votes;
+// 票数阈值
+uint256 _votesTarget;
+// 提案ID
+uint256 _proposalId;
+// 提案状态 为了减少 gas 费消耗，使用uint256类型进行状态记录，并通过mapping来提供状态映射
+mapping(uint256 => uint256) proposalStatus;
+mapping(uint256 => string) pstatus;
+// 投票者集合
+mapping(uint256 => mapping(address => bool)) voted;
+/*
+* 初始化函数
+*/
+constructor(address owner){
+_owner = owner;
+// 初始化提案状态映射
+pstatus[0] = "stoped";
+pstatus[1] = "voting";
+pstatus[2] = "passed";
+pstatus[3] = "completed";
+}
+/*
+* 启动竞选提案 theSender() 方法非必须，等同于 msg.sender;
+*/
+function propose(string memory candidate, uint256 target) public returns(uint256 proposalId){
+// 验证身份
+require(theSender() == _owner, "error: No permission");
+// 验证提案状态
+require(proposalStatus[_proposalId] == 0, "error: The proposal is not stoped status");
+// 设置候选人
+_candidate[_proposalId] = candidate;
+// 设置票数阈值
+_votesTarget = target;
+// 设置提案状态
+proposalStatus[_proposalId] = 1;
+return _proposalId;
+}
+/*
+* 查询提案状态
+*/
+function queryProposal(uint256 proposalId) public view returns(string memory status){
+return pstatus[proposalStatus[proposalId]];
+}
+/*
+* 投票
+*/
+function vote(uint256 proposalId) public returns(string memory status){
+// 验证提案状态
+require(proposalStatus[proposalId] == 1, "error: The proposal is not voteable");
+// 验证是否已投票
+require(voted[proposalId][theSender()] == false, "error: Each person can only vote once");
+// 增加已获取的票数
+_votes[proposalId] = _votes[proposalId].add(1);
+// 避免重复投票
+voted[proposalId][theSender()] = true;
+// 是否达到票数阈值
+if (_votes[proposalId] >= _votesTarget){
+proposalStatus[proposalId] = 2;
+}
+return "vote successfuly";
+}
+/*
+* 查询提案获取的票数
+*/
+function queryVotes(uint256 proposalId) public view returns(uint256 votes){
+return _votes[proposalId];
+}
+/*
+* 检票
+*/
+function check(uint256 proposalId) public returns(string memory status){
+// 验证提案状态
+require(proposalStatus[proposalId] == 2, "error: The proposal is not eligible for wicket");
+// 验证调用者身份
+require(theSender() == _owner, "error: No permission");
+// 修改提案状态
+proposalStatus[proposalId] = 3;
+// 修改学生会主席信息
+_president = _candidate[proposalId];
+// 为下一次发起提案做准备
+_proposalId = _proposalId.add(1);
+return "check successfuly, the proposal will be take effect";
+}
+/*
+* 查询学生会主席信息
+*/
+function queryPresident() public view returns(string memory president){
+return _president;
+}
+/*
+* 查询提案的候选人信息
+*/
+function queryCandidate(uint256 proposalId) public view returns(string memory candidate){
+return _candidate[proposalId];
+}
+/*
+* 返回此次调用者
+*/
+function theSender() private view returns(address){
+return msg.sender;
+}
+}
+library SafeMath {
+function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+// Gas optimization: this is cheaper than requiring 'a' not being zero, but the
+// benefit is lost if 'b' is also tested.
+// See: https://github.com/OpenZeppelin/openzeppelin-solidity/pull/522
+if (a == 0) {
+return 0;
+}
+uint256 c = a * b;
+require(c / a == b);
+return c;
+}
+/**
+* @dev Integer division of two numbers truncating the quotient, reverts on division by zero.
+*/
+function div(uint256 a, uint256 b) internal pure returns (uint256) {
+require(b > 0); // Solidity only automatically asserts when dividing by 0
+uint256 c = a / b;
+// assert(a == b * c + a % b); // There is no case in which this doesn't hold
+return c;
+}
+/**
+* @dev Subtracts two numbers, reverts on overflow (i.e. if subtrahend is greater than minuend).
+*/
+function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+require(b &lt;= a);
+uint256 c = a - b;
+return c;
+}
+/**
+* @dev Adds two numbers, reverts on overflow.
+*/
+function add(uint256 a, uint256 b) internal pure returns (uint256) {
+uint256 c = a + b;
+require(c >= a);
+return c;
+}
+/**
+* @dev Divides two numbers and returns the remainder (unsigned integer modulo),
+* reverts when dividing by zero.
+*/
+function mod(uint256 a, uint256 b) internal pure returns (uint256) {
+require(b != 0);
+return a % b;
+}
+}</code><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-solidity data-lang=solidity><span class=line><span class=cl><span class=c1>// SPDX-License-Identifier: SimPL-2.0
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=k>pragma solidity</span> <span class=o>^</span><span class=mi>0</span><span class=p>.</span><span class=mi>8</span><span class=p>.</span><span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>contract</span> <span class=nc>campaign</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 为 uint256 类型使用 SafeMath 库
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kn>using</span> <span class=n>SafeMath</span> <span class=k>for</span> <span class=kt>uint256</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// owner 账户
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kt>address</span> <span class=n>_owner</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 学生会主席
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kt>string</span> <span class=n>_president</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 提案候选人
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kd>mapping</span><span class=p>(</span><span class=kt>uint256</span> <span class=o>=&gt;</span> <span class=kt>string</span><span class=p>)</span> <span class=n>_candidate</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 提案票数
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kd>mapping</span><span class=p>(</span><span class=kt>uint256</span> <span class=o>=&gt;</span> <span class=kt>uint256</span><span class=p>)</span> <span class=n>_votes</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 票数阈值
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kt>uint256</span> <span class=n>_votesTarget</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	<span class=c1>// 提案ID
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kt>uint256</span> <span class=n>_proposalId</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	<span class=c1>// 提案状态 为了减少 gas 费消耗，使用uint256类型进行状态记录，并通过mapping来提供状态映射
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kd>mapping</span><span class=p>(</span><span class=kt>uint256</span> <span class=o>=&gt;</span> <span class=kt>uint256</span><span class=p>)</span> <span class=n>proposalStatus</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>mapping</span><span class=p>(</span><span class=kt>uint256</span> <span class=o>=&gt;</span> <span class=kt>string</span><span class=p>)</span> <span class=n>pstatus</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 投票者集合
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kd>mapping</span><span class=p>(</span><span class=kt>uint256</span> <span class=o>=&gt;</span> <span class=kd>mapping</span><span class=p>(</span><span class=kt>address</span> <span class=o>=&gt;</span> <span class=kt>bool</span><span class=p>))</span> <span class=n>voted</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm>	* 初始化函数
+</span></span></span><span class=line><span class=cl><span class=cm>	*/</span>
+</span></span><span class=line><span class=cl>	<span class=kd>constructor</span><span class=p>(</span><span class=kt>address</span> <span class=n>owner</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>		<span class=n>_owner</span> <span class=o>=</span> <span class=n>owner</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// 初始化提案状态映射
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=n>pstatus</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>=</span> <span class=s>&#34;stoped&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=n>pstatus</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=o>=</span> <span class=s>&#34;voting&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=n>pstatus</span><span class=p>[</span><span class=mi>2</span><span class=p>]</span> <span class=o>=</span> <span class=s>&#34;passed&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=n>pstatus</span><span class=p>[</span><span class=mi>3</span><span class=p>]</span> <span class=o>=</span> <span class=s>&#34;completed&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm>	* 启动竞选提案 theSender() 方法非必须，等同于 msg.sender;
+</span></span></span><span class=line><span class=cl><span class=cm>	*/</span>
+</span></span><span class=line><span class=cl>	<span class=kd>function</span> <span class=nf>propose</span><span class=p>(</span><span class=kt>string</span> <span class=k>memory</span> <span class=n>candidate</span><span class=p>,</span> <span class=kt>uint256</span> <span class=n>target</span><span class=p>)</span> <span class=k>public</span> <span class=k>returns</span><span class=p>(</span><span class=kt>uint256</span> <span class=n>proposalId</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// 验证身份
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=nb>require</span><span class=p>(</span><span class=n>theSender</span><span class=p>()</span> <span class=o>==</span> <span class=n>_owner</span><span class=p>,</span> <span class=s>&#34;error: No permission&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// 验证提案状态
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=nb>require</span><span class=p>(</span><span class=n>proposalStatus</span><span class=p>[</span><span class=n>_proposalId</span><span class=p>]</span> <span class=o>==</span> <span class=mi>0</span><span class=p>,</span> <span class=s>&#34;error: The proposal is not stoped status&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// 设置候选人
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=n>_candidate</span><span class=p>[</span><span class=n>_proposalId</span><span class=p>]</span> <span class=o>=</span> <span class=n>candidate</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// 设置票数阈值
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=n>_votesTarget</span> <span class=o>=</span> <span class=n>target</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// 设置提案状态
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=n>proposalStatus</span><span class=p>[</span><span class=n>_proposalId</span><span class=p>]</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=n>_proposalId</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm>	* 查询提案状态
+</span></span></span><span class=line><span class=cl><span class=cm>	*/</span>
+</span></span><span class=line><span class=cl>	<span class=kd>function</span> <span class=nf>queryProposal</span><span class=p>(</span><span class=kt>uint256</span> <span class=n>proposalId</span><span class=p>)</span> <span class=k>public</span> <span class=k>view</span> <span class=k>returns</span><span class=p>(</span><span class=kt>string</span> <span class=k>memory</span> <span class=n>status</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=n>pstatus</span><span class=p>[</span><span class=n>proposalStatus</span><span class=p>[</span><span class=n>proposalId</span><span class=p>]];</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm>	* 投票
+</span></span></span><span class=line><span class=cl><span class=cm>	*/</span>
+</span></span><span class=line><span class=cl>	<span class=kd>function</span> <span class=nf>vote</span><span class=p>(</span><span class=kt>uint256</span> <span class=n>proposalId</span><span class=p>)</span> <span class=k>public</span> <span class=k>returns</span><span class=p>(</span><span class=kt>string</span> <span class=k>memory</span> <span class=n>status</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// 验证提案状态
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=nb>require</span><span class=p>(</span><span class=n>proposalStatus</span><span class=p>[</span><span class=n>proposalId</span><span class=p>]</span> <span class=o>==</span> <span class=mi>1</span><span class=p>,</span> <span class=s>&#34;error: The proposal is not voteable&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// 验证是否已投票
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=nb>require</span><span class=p>(</span><span class=n>voted</span><span class=p>[</span><span class=n>proposalId</span><span class=p>][</span><span class=n>theSender</span><span class=p>()]</span> <span class=o>==</span> <span class=kc>false</span><span class=p>,</span> <span class=s>&#34;error: Each person can only vote once&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// 增加已获取的票数
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=n>_votes</span><span class=p>[</span><span class=n>proposalId</span><span class=p>]</span> <span class=o>=</span> <span class=n>_votes</span><span class=p>[</span><span class=n>proposalId</span><span class=p>].</span><span class=n>add</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// 避免重复投票
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=n>voted</span><span class=p>[</span><span class=n>proposalId</span><span class=p>][</span><span class=n>theSender</span><span class=p>()]</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// 是否达到票数阈值
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=k>if</span> <span class=p>(</span><span class=n>_votes</span><span class=p>[</span><span class=n>proposalId</span><span class=p>]</span> <span class=o>&gt;=</span> <span class=n>_votesTarget</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>			<span class=n>proposalStatus</span><span class=p>[</span><span class=n>proposalId</span><span class=p>]</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=s>&#34;vote successfuly&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm>	* 查询提案获取的票数
+</span></span></span><span class=line><span class=cl><span class=cm>	*/</span>
+</span></span><span class=line><span class=cl>	<span class=kd>function</span> <span class=nf>queryVotes</span><span class=p>(</span><span class=kt>uint256</span> <span class=n>proposalId</span><span class=p>)</span> <span class=k>public</span> <span class=k>view</span> <span class=k>returns</span><span class=p>(</span><span class=kt>uint256</span> <span class=n>votes</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=n>_votes</span><span class=p>[</span><span class=n>proposalId</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm>	* 检票
+</span></span></span><span class=line><span class=cl><span class=cm>	*/</span>
+</span></span><span class=line><span class=cl>	<span class=kd>function</span> <span class=nf>check</span><span class=p>(</span><span class=kt>uint256</span> <span class=n>proposalId</span><span class=p>)</span> <span class=k>public</span> <span class=k>returns</span><span class=p>(</span><span class=kt>string</span> <span class=k>memory</span> <span class=n>status</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// 验证提案状态
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=nb>require</span><span class=p>(</span><span class=n>proposalStatus</span><span class=p>[</span><span class=n>proposalId</span><span class=p>]</span> <span class=o>==</span> <span class=mi>2</span><span class=p>,</span> <span class=s>&#34;error: The proposal is not eligible for wicket&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// 验证调用者身份
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=nb>require</span><span class=p>(</span><span class=n>theSender</span><span class=p>()</span> <span class=o>==</span> <span class=n>_owner</span><span class=p>,</span> <span class=s>&#34;error: No permission&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// 修改提案状态
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=n>proposalStatus</span><span class=p>[</span><span class=n>proposalId</span><span class=p>]</span> <span class=o>=</span> <span class=mi>3</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// 修改学生会主席信息
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=n>_president</span> <span class=o>=</span> <span class=n>_candidate</span><span class=p>[</span><span class=n>proposalId</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// 为下一次发起提案做准备
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=n>_proposalId</span> <span class=o>=</span> <span class=n>_proposalId</span><span class=p>.</span><span class=n>add</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=s>&#34;check successfuly, the proposal will be take effect&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm>	* 查询学生会主席信息
+</span></span></span><span class=line><span class=cl><span class=cm>	*/</span>
+</span></span><span class=line><span class=cl>	<span class=kd>function</span> <span class=nf>queryPresident</span><span class=p>()</span> <span class=k>public</span> <span class=k>view</span> <span class=k>returns</span><span class=p>(</span><span class=kt>string</span> <span class=k>memory</span> <span class=n>president</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=n>_president</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	<span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm>	* 查询提案的候选人信息
+</span></span></span><span class=line><span class=cl><span class=cm>	*/</span>
+</span></span><span class=line><span class=cl>	<span class=kd>function</span> <span class=nf>queryCandidate</span><span class=p>(</span><span class=kt>uint256</span> <span class=n>proposalId</span><span class=p>)</span> <span class=k>public</span> <span class=k>view</span> <span class=k>returns</span><span class=p>(</span><span class=kt>string</span> <span class=k>memory</span> <span class=n>candidate</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=n>_candidate</span><span class=p>[</span><span class=n>proposalId</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm>	* 返回此次调用者
+</span></span></span><span class=line><span class=cl><span class=cm>	*/</span>
+</span></span><span class=line><span class=cl>	<span class=kd>function</span> <span class=nf>theSender</span><span class=p>()</span> <span class=k>private</span> <span class=k>view</span> <span class=k>returns</span><span class=p>(</span><span class=kt>address</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=nb>msg</span><span class=p>.</span><span class=nb>sender</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>library</span> <span class=n>SafeMath</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>function</span> <span class=nf>mul</span><span class=p>(</span><span class=kt>uint256</span> <span class=n>a</span><span class=p>,</span> <span class=kt>uint256</span> <span class=n>b</span><span class=p>)</span> <span class=k>internal</span> <span class=k>pure</span> <span class=k>returns</span> <span class=p>(</span><span class=kt>uint256</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Gas optimization: this is cheaper than requiring &#39;a&#39; not being zero, but the
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// benefit is lost if &#39;b&#39; is also tested.
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// See: https://github.com/OpenZeppelin/openzeppelin-solidity/pull/522
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>if</span> <span class=p>(</span><span class=n>a</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kt>uint256</span> <span class=n>c</span> <span class=o>=</span> <span class=n>a</span> <span class=o>*</span> <span class=n>b</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>require</span><span class=p>(</span><span class=n>c</span> <span class=o>/</span> <span class=n>a</span> <span class=o>==</span> <span class=n>b</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>c</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>  * @dev Integer division of two numbers truncating the quotient, reverts on division by zero.
+</span></span></span><span class=line><span class=cl><span class=cm>  */</span>
+</span></span><span class=line><span class=cl>  <span class=kd>function</span> <span class=nf>div</span><span class=p>(</span><span class=kt>uint256</span> <span class=n>a</span><span class=p>,</span> <span class=kt>uint256</span> <span class=n>b</span><span class=p>)</span> <span class=k>internal</span> <span class=k>pure</span> <span class=k>returns</span> <span class=p>(</span><span class=kt>uint256</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nb>require</span><span class=p>(</span><span class=n>b</span> <span class=o>&gt;</span> <span class=mi>0</span><span class=p>);</span> <span class=c1>// Solidity only automatically asserts when dividing by 0
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kt>uint256</span> <span class=n>c</span> <span class=o>=</span> <span class=n>a</span> <span class=o>/</span> <span class=n>b</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// assert(a == b * c + a % b); // There is no case in which this doesn&#39;t hold
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>c</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>  * @dev Subtracts two numbers, reverts on overflow (i.e. if subtrahend is greater than minuend).
+</span></span></span><span class=line><span class=cl><span class=cm>  */</span>
+</span></span><span class=line><span class=cl>  <span class=kd>function</span> <span class=nf>sub</span><span class=p>(</span><span class=kt>uint256</span> <span class=n>a</span><span class=p>,</span> <span class=kt>uint256</span> <span class=n>b</span><span class=p>)</span> <span class=k>internal</span> <span class=k>pure</span> <span class=k>returns</span> <span class=p>(</span><span class=kt>uint256</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nb>require</span><span class=p>(</span><span class=n>b</span> <span class=o>&lt;=</span> <span class=n>a</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=kt>uint256</span> <span class=n>c</span> <span class=o>=</span> <span class=n>a</span> <span class=o>-</span> <span class=n>b</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>c</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>  * @dev Adds two numbers, reverts on overflow.
+</span></span></span><span class=line><span class=cl><span class=cm>  */</span>
+</span></span><span class=line><span class=cl>  <span class=kd>function</span> <span class=nf>add</span><span class=p>(</span><span class=kt>uint256</span> <span class=n>a</span><span class=p>,</span> <span class=kt>uint256</span> <span class=n>b</span><span class=p>)</span> <span class=k>internal</span> <span class=k>pure</span> <span class=k>returns</span> <span class=p>(</span><span class=kt>uint256</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>uint256</span> <span class=n>c</span> <span class=o>=</span> <span class=n>a</span> <span class=o>+</span> <span class=n>b</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>require</span><span class=p>(</span><span class=n>c</span> <span class=o>&gt;=</span> <span class=n>a</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>c</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>  * @dev Divides two numbers and returns the remainder (unsigned integer modulo),
+</span></span></span><span class=line><span class=cl><span class=cm>  * reverts when dividing by zero.
+</span></span></span><span class=line><span class=cl><span class=cm>  */</span>
+</span></span><span class=line><span class=cl>  <span class=kd>function</span> <span class=nf>mod</span><span class=p>(</span><span class=kt>uint256</span> <span class=n>a</span><span class=p>,</span> <span class=kt>uint256</span> <span class=n>b</span><span class=p>)</span> <span class=k>internal</span> <span class=k>pure</span> <span class=k>returns</span> <span class=p>(</span><span class=kt>uint256</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nb>require</span><span class=p>(</span><span class=n>b</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>a</span> <span class=o>%</span> <span class=n>b</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div></div></div><h3 id=合约部署>合约部署</h3><h4 id=编译>编译</h4><p><strong><code>solc --abi --bin ./campaign.sol -o build</code></strong></p><h4 id=部署>部署</h4><blockquote><p>通过 Java SDK 在百度超级链开放网络进行部署。</p><p>SDK使用文档：<a class=link href=https://xuper.baidu.com/n/xuperdoc/xuperos/xuperos_java.html target=_blank rel=noopener>Java SDK接入指南</a></p></blockquote><h5 id=获取sdk>获取SDK</h5><div class=codeblock><header><span class=codeblock-lang>xml</span>
+<button class=codeblock-copy data-id=codeblock-id-1 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-1 style=display:none>&lt;dependency>
+&lt;groupId>com.baidu.xuper&lt;/groupId>
+&lt;artifactId>xuper-java-sdk&lt;/artifactId>
+&lt;version>0.3.0&lt;/version>
+&lt;/dependency></code><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;dependency&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&lt;groupId&gt;</span>com.baidu.xuper<span class=nt>&lt;/groupId&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&lt;artifactId&gt;</span>xuper-java-sdk<span class=nt>&lt;/artifactId&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&lt;version&gt;</span>0.3.0<span class=nt>&lt;/version&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;/dependency&gt;</span></span></span></code></pre></td></tr></table></div></div></div></div><h5 id=部署合约>部署合约</h5><div class=codeblock><header><span class=codeblock-lang>java</span>
+<button class=codeblock-copy data-id=codeblock-id-2 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-2 style=display:none>import com.baidu.xuper.api.Account;
+import com.baidu.xuper.api.AddressTrans;
+import com.baidu.xuper.api.Transaction;
+import com.baidu.xuper.api.XuperClient;
+import com.baidu.xuper.config.Config;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
+public class Main {
+public static XuperClient client;
+public static void main(String[] args) {
+// 设置背书服务
+Config.setConfigPath("./conf/sdk.yaml");
+Account account = Account.getAccountFromFile("开放网络私钥目录","安全码");
+AddressTrans owner = AddressTrans.xChainToEvmAddress(account.getAddress());
+client = new XuperClient("39.156.69.83:37100");
+// 开放网络工作台注册的合约账户
+String contractAccount = "";
+account.setContractAccount(contractAccount);
+try {
+// 合约编译文件
+byte[] abi = Files.readAllBytes(Paths.get("./build/campaign.abi"));
+byte[] bin = Files.readAllBytes(Paths.get("./build/campaign.bin"));
+Map&lt;String,String> params = new HashMap&lt;>();
+params.put("owner", owner.getAddr());
+Transaction tx = client.deployEVMContract(account,bin,abi,"campaign", params);
+System.out.println(tx.getContractResponse().getBodyStr());
+} catch (IOException e) {
+e.printStackTrace();
+}
+}
+}</code><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.Account</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.AddressTrans</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.Transaction</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.XuperClient</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.config.Config</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.io.IOException</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.nio.file.Files</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.nio.file.Paths</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.HashMap</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.Map</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Main</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=n>XuperClient</span> <span class=n>client</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 设置背书服务
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>Config</span><span class=o>.</span><span class=na>setConfigPath</span><span class=o>(</span><span class=s>&#34;./conf/sdk.yaml&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Account</span> <span class=n>account</span> <span class=o>=</span> <span class=n>Account</span><span class=o>.</span><span class=na>getAccountFromFile</span><span class=o>(</span><span class=s>&#34;开放网络私钥目录&#34;</span><span class=o>,</span><span class=s>&#34;安全码&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>      	<span class=n>AddressTrans</span> <span class=n>owner</span> <span class=o>=</span> <span class=n>AddressTrans</span><span class=o>.</span><span class=na>xChainToEvmAddress</span><span class=o>(</span><span class=n>account</span><span class=o>.</span><span class=na>getAddress</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>        <span class=n>client</span> <span class=o>=</span> <span class=k>new</span> <span class=n>XuperClient</span><span class=o>(</span><span class=s>&#34;39.156.69.83:37100&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 开放网络工作台注册的合约账户
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>String</span> <span class=n>contractAccount</span> <span class=o>=</span> <span class=s>&#34;&#34;</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>account</span><span class=o>.</span><span class=na>setContractAccount</span><span class=o>(</span><span class=n>contractAccount</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=c1>// 合约编译文件
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=kt>byte</span><span class=o>[]</span> <span class=n>abi</span> <span class=o>=</span> <span class=n>Files</span><span class=o>.</span><span class=na>readAllBytes</span><span class=o>(</span><span class=n>Paths</span><span class=o>.</span><span class=na>get</span><span class=o>(</span><span class=s>&#34;./build/campaign.abi&#34;</span><span class=o>));</span>
+</span></span><span class=line><span class=cl>            <span class=kt>byte</span><span class=o>[]</span> <span class=n>bin</span> <span class=o>=</span> <span class=n>Files</span><span class=o>.</span><span class=na>readAllBytes</span><span class=o>(</span><span class=n>Paths</span><span class=o>.</span><span class=na>get</span><span class=o>(</span><span class=s>&#34;./build/campaign.bin&#34;</span><span class=o>));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=n>Map</span><span class=o>&lt;</span><span class=n>String</span><span class=o>,</span><span class=n>String</span><span class=o>&gt;</span> <span class=n>params</span> <span class=o>=</span> <span class=k>new</span> <span class=n>HashMap</span><span class=o>&lt;&gt;();</span>
+</span></span><span class=line><span class=cl>            <span class=n>params</span><span class=o>.</span><span class=na>put</span><span class=o>(</span><span class=s>&#34;owner&#34;</span><span class=o>,</span> <span class=n>owner</span><span class=o>.</span><span class=na>getAddr</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=n>Transaction</span> <span class=n>tx</span> <span class=o>=</span> <span class=n>client</span><span class=o>.</span><span class=na>deployEVMContract</span><span class=o>(</span><span class=n>account</span><span class=o>,</span><span class=n>bin</span><span class=o>,</span><span class=n>abi</span><span class=o>,</span><span class=s>&#34;campaign&#34;</span><span class=o>,</span> <span class=n>params</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>            <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>tx</span><span class=o>.</span><span class=na>getContractResponse</span><span class=o>().</span><span class=na>getBodyStr</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>IOException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>e</span><span class=o>.</span><span class=na>printStackTrace</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span></span></span></code></pre></td></tr></table></div></div></div></div><h3 id=合约调用>合约调用</h3><h4 id=发起提案>发起提案</h4><div class=codeblock><header><span class=codeblock-lang>java</span>
+<button class=codeblock-copy data-id=codeblock-id-3 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-3 style=display:none>import com.baidu.xuper.api.Account;
+import com.baidu.xuper.api.Transaction;
+import com.baidu.xuper.api.XuperClient;
+import com.baidu.xuper.config.Config;
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
+public class Main {
+public static XuperClient client;
+public static void main(String[] args) {
+// 设置背书服务
+Config.setConfigPath("./conf/sdk.yaml");
+Account account = Account.getAccountFromFile("开放网络私钥目录","安全码");
+client = new XuperClient("39.156.69.83:37100");
+String contract = "campaign";
+String method = "propose";
+Map&lt;String,String> params = new HashMap&lt;>();
+params.put("candidate", "alice");
+params.put("target", "2");
+Transaction tx = client.invokeEVMContract(account,contract, method, params, BigInteger.ZERO);
+System.out.println(tx.getContractResponse().getBodyStr());
+}
+}
+// output
+[{"proposalId":"0"}]</code><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.Account</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.Transaction</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.XuperClient</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.config.Config</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.math.BigInteger</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.HashMap</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.Map</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Main</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=n>XuperClient</span> <span class=n>client</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 设置背书服务
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>Config</span><span class=o>.</span><span class=na>setConfigPath</span><span class=o>(</span><span class=s>&#34;./conf/sdk.yaml&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Account</span> <span class=n>account</span> <span class=o>=</span> <span class=n>Account</span><span class=o>.</span><span class=na>getAccountFromFile</span><span class=o>(</span><span class=s>&#34;开放网络私钥目录&#34;</span><span class=o>,</span><span class=s>&#34;安全码&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>client</span> <span class=o>=</span> <span class=k>new</span> <span class=n>XuperClient</span><span class=o>(</span><span class=s>&#34;39.156.69.83:37100&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>String</span> <span class=n>contract</span> <span class=o>=</span> <span class=s>&#34;campaign&#34;</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>String</span> <span class=n>method</span> <span class=o>=</span> <span class=s>&#34;propose&#34;</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>Map</span><span class=o>&lt;</span><span class=n>String</span><span class=o>,</span><span class=n>String</span><span class=o>&gt;</span> <span class=n>params</span> <span class=o>=</span> <span class=k>new</span> <span class=n>HashMap</span><span class=o>&lt;&gt;();</span>
+</span></span><span class=line><span class=cl>        <span class=n>params</span><span class=o>.</span><span class=na>put</span><span class=o>(</span><span class=s>&#34;candidate&#34;</span><span class=o>,</span> <span class=s>&#34;alice&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>params</span><span class=o>.</span><span class=na>put</span><span class=o>(</span><span class=s>&#34;target&#34;</span><span class=o>,</span> <span class=s>&#34;2&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Transaction</span> <span class=n>tx</span> <span class=o>=</span> <span class=n>client</span><span class=o>.</span><span class=na>invokeEVMContract</span><span class=o>(</span><span class=n>account</span><span class=o>,</span><span class=n>contract</span><span class=o>,</span> <span class=n>method</span><span class=o>,</span> <span class=n>params</span><span class=o>,</span> <span class=n>BigInteger</span><span class=o>.</span><span class=na>ZERO</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>tx</span><span class=o>.</span><span class=na>getContractResponse</span><span class=o>().</span><span class=na>getBodyStr</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// output
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>[{</span><span class=s>&#34;proposalId&#34;</span><span class=o>:</span><span class=s>&#34;0&#34;</span><span class=o>}]</span></span></span></code></pre></td></tr></table></div></div></div></div><h4 id=查询提案状态>查询提案状态</h4><div class=codeblock><header><span class=codeblock-lang>java</span>
+<button class=codeblock-copy data-id=codeblock-id-4 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-4 style=display:none>import com.baidu.xuper.api.Account;
+import com.baidu.xuper.api.Transaction;
+import com.baidu.xuper.api.XuperClient;
+import com.baidu.xuper.config.Config;
+import java.util.HashMap;
+import java.util.Map;
+public class Main {
+public static XuperClient client;
+public static void main(String[] args) {
+// 设置背书服务
+Config.setConfigPath("./conf/sdk.yaml");
+Account account = Account.getAccountFromFile("开放网络私钥目录","安全码");
+client = new XuperClient("39.156.69.83:37100");
+String contract = "campaign";
+String method = "queryProposal";
+Map&lt;String,String> params = new HashMap&lt;>();
+params.put("proposalId", "0");
+Transaction tx = client.queryEVMContract(account,contract, method, params);
+System.out.println(tx.getContractResponse().getBodyStr());
+}
+}
+// output
+[{"status":"voting"}]</code><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.Account</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.Transaction</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.XuperClient</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.config.Config</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.HashMap</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.Map</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Main</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=n>XuperClient</span> <span class=n>client</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 设置背书服务
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>Config</span><span class=o>.</span><span class=na>setConfigPath</span><span class=o>(</span><span class=s>&#34;./conf/sdk.yaml&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Account</span> <span class=n>account</span> <span class=o>=</span> <span class=n>Account</span><span class=o>.</span><span class=na>getAccountFromFile</span><span class=o>(</span><span class=s>&#34;开放网络私钥目录&#34;</span><span class=o>,</span><span class=s>&#34;安全码&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>client</span> <span class=o>=</span> <span class=k>new</span> <span class=n>XuperClient</span><span class=o>(</span><span class=s>&#34;39.156.69.83:37100&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>String</span> <span class=n>contract</span> <span class=o>=</span> <span class=s>&#34;campaign&#34;</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>String</span> <span class=n>method</span> <span class=o>=</span> <span class=s>&#34;queryProposal&#34;</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>Map</span><span class=o>&lt;</span><span class=n>String</span><span class=o>,</span><span class=n>String</span><span class=o>&gt;</span> <span class=n>params</span> <span class=o>=</span> <span class=k>new</span> <span class=n>HashMap</span><span class=o>&lt;&gt;();</span>
+</span></span><span class=line><span class=cl>        <span class=n>params</span><span class=o>.</span><span class=na>put</span><span class=o>(</span><span class=s>&#34;proposalId&#34;</span><span class=o>,</span> <span class=s>&#34;0&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Transaction</span> <span class=n>tx</span> <span class=o>=</span> <span class=n>client</span><span class=o>.</span><span class=na>queryEVMContract</span><span class=o>(</span><span class=n>account</span><span class=o>,</span><span class=n>contract</span><span class=o>,</span> <span class=n>method</span><span class=o>,</span> <span class=n>params</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>tx</span><span class=o>.</span><span class=na>getContractResponse</span><span class=o>().</span><span class=na>getBodyStr</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// output
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>[{</span><span class=s>&#34;status&#34;</span><span class=o>:</span><span class=s>&#34;voting&#34;</span><span class=o>}]</span></span></span></code></pre></td></tr></table></div></div></div></div><h4 id=投票>投票</h4><div class=codeblock><header><span class=codeblock-lang>java</span>
+<button class=codeblock-copy data-id=codeblock-id-5 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-5 style=display:none>import com.baidu.xuper.api.Account;
+import com.baidu.xuper.api.Transaction;
+import com.baidu.xuper.api.XuperClient;
+import com.baidu.xuper.config.Config;
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
+public class Main {
+public static XuperClient client;
+public static void main(String[] args) {
+// 设置背书服务
+Config.setConfigPath("./conf/sdk.yaml");
+Account account = Account.getAccountFromFile("开放网络私钥目录","安全码");
+Account account2 = Account.getAccountFromFile("开放网络私钥目录","安全码");
+client = new XuperClient("39.156.69.83:37100");
+String contract = "campaign";
+String method = "vote";
+Map&lt;String,String> params = new HashMap&lt;>();
+params.put("proposalId", "0");
+// 投两票
+Transaction tx = client.invokeEVMContract(account,contract, method, params, BigInteger.ZERO);
+System.out.println("account vote res: " + tx.getContractResponse().getBodyStr());
+// 重复投票
+Transaction tx = client.invokeEVMContract(account,contract, method, params, BigInteger.ZERO);
+System.out.println("account vote res: " + tx.getContractResponse().getBodyStr());
+Transaction tx2 = client.invokeEVMContract(account2,contract, method, params, BigInteger.ZERO);
+System.out.println("account2 vote res: " + tx2.getContractResponse().getBodyStr());
+// 非投票状态下投票
+Transaction tx2 = client.invokeEVMContract(account2,contract, method, params, BigInteger.ZERO);
+System.out.println("account2 vote res: " + tx2.getContractResponse().getBodyStr());
+}
+}
+// output
+account vote res: [{"status":"vote successfuly"}]
+'error: Each person can only vote once'
+account2 vote res: [{"status":"vote successfuly"}]
+'error: The proposal is not voteable'</code><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.Account</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.Transaction</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.XuperClient</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.config.Config</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.math.BigInteger</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.HashMap</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.Map</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Main</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=n>XuperClient</span> <span class=n>client</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 设置背书服务
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>Config</span><span class=o>.</span><span class=na>setConfigPath</span><span class=o>(</span><span class=s>&#34;./conf/sdk.yaml&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Account</span> <span class=n>account</span> <span class=o>=</span> <span class=n>Account</span><span class=o>.</span><span class=na>getAccountFromFile</span><span class=o>(</span><span class=s>&#34;开放网络私钥目录&#34;</span><span class=o>,</span><span class=s>&#34;安全码&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Account</span> <span class=n>account2</span> <span class=o>=</span> <span class=n>Account</span><span class=o>.</span><span class=na>getAccountFromFile</span><span class=o>(</span><span class=s>&#34;开放网络私钥目录&#34;</span><span class=o>,</span><span class=s>&#34;安全码&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>client</span> <span class=o>=</span> <span class=k>new</span> <span class=n>XuperClient</span><span class=o>(</span><span class=s>&#34;39.156.69.83:37100&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>String</span> <span class=n>contract</span> <span class=o>=</span> <span class=s>&#34;campaign&#34;</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>String</span> <span class=n>method</span> <span class=o>=</span> <span class=s>&#34;vote&#34;</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>Map</span><span class=o>&lt;</span><span class=n>String</span><span class=o>,</span><span class=n>String</span><span class=o>&gt;</span> <span class=n>params</span> <span class=o>=</span> <span class=k>new</span> <span class=n>HashMap</span><span class=o>&lt;&gt;();</span>
+</span></span><span class=line><span class=cl>        <span class=n>params</span><span class=o>.</span><span class=na>put</span><span class=o>(</span><span class=s>&#34;proposalId&#34;</span><span class=o>,</span> <span class=s>&#34;0&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 投两票
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>Transaction</span> <span class=n>tx</span> <span class=o>=</span> <span class=n>client</span><span class=o>.</span><span class=na>invokeEVMContract</span><span class=o>(</span><span class=n>account</span><span class=o>,</span><span class=n>contract</span><span class=o>,</span> <span class=n>method</span><span class=o>,</span> <span class=n>params</span><span class=o>,</span> <span class=n>BigInteger</span><span class=o>.</span><span class=na>ZERO</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;account vote res: &#34;</span> <span class=o>+</span> <span class=n>tx</span><span class=o>.</span><span class=na>getContractResponse</span><span class=o>().</span><span class=na>getBodyStr</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>      	<span class=c1>// 重复投票
+</span></span></span><span class=line><span class=cl><span class=c1></span>      	<span class=n>Transaction</span> <span class=n>tx</span> <span class=o>=</span> <span class=n>client</span><span class=o>.</span><span class=na>invokeEVMContract</span><span class=o>(</span><span class=n>account</span><span class=o>,</span><span class=n>contract</span><span class=o>,</span> <span class=n>method</span><span class=o>,</span> <span class=n>params</span><span class=o>,</span> <span class=n>BigInteger</span><span class=o>.</span><span class=na>ZERO</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;account vote res: &#34;</span> <span class=o>+</span> <span class=n>tx</span><span class=o>.</span><span class=na>getContractResponse</span><span class=o>().</span><span class=na>getBodyStr</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>        <span class=n>Transaction</span> <span class=n>tx2</span> <span class=o>=</span> <span class=n>client</span><span class=o>.</span><span class=na>invokeEVMContract</span><span class=o>(</span><span class=n>account2</span><span class=o>,</span><span class=n>contract</span><span class=o>,</span> <span class=n>method</span><span class=o>,</span> <span class=n>params</span><span class=o>,</span> <span class=n>BigInteger</span><span class=o>.</span><span class=na>ZERO</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;account2 vote res: &#34;</span> <span class=o>+</span> <span class=n>tx2</span><span class=o>.</span><span class=na>getContractResponse</span><span class=o>().</span><span class=na>getBodyStr</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>      	<span class=c1>// 非投票状态下投票
+</span></span></span><span class=line><span class=cl><span class=c1></span>      	<span class=n>Transaction</span> <span class=n>tx2</span> <span class=o>=</span> <span class=n>client</span><span class=o>.</span><span class=na>invokeEVMContract</span><span class=o>(</span><span class=n>account2</span><span class=o>,</span><span class=n>contract</span><span class=o>,</span> <span class=n>method</span><span class=o>,</span> <span class=n>params</span><span class=o>,</span> <span class=n>BigInteger</span><span class=o>.</span><span class=na>ZERO</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;account2 vote res: &#34;</span> <span class=o>+</span> <span class=n>tx2</span><span class=o>.</span><span class=na>getContractResponse</span><span class=o>().</span><span class=na>getBodyStr</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// output
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>account</span> <span class=n>vote</span> <span class=n>res</span><span class=o>:</span> <span class=o>[{</span><span class=s>&#34;status&#34;</span><span class=o>:</span><span class=s>&#34;vote successfuly&#34;</span><span class=o>}]</span>
+</span></span><span class=line><span class=cl><span class=err>&#39;</span><span class=n>error</span><span class=o>:</span> <span class=n>Each</span> <span class=n>person</span> <span class=n>can</span> <span class=n>only</span> <span class=n>vote</span> <span class=n>once</span><span class=err>&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>account2</span> <span class=n>vote</span> <span class=n>res</span><span class=o>:</span> <span class=o>[{</span><span class=s>&#34;status&#34;</span><span class=o>:</span><span class=s>&#34;vote successfuly&#34;</span><span class=o>}]</span>
+</span></span><span class=line><span class=cl><span class=err>&#39;</span><span class=n>error</span><span class=o>:</span> <span class=n>The</span> <span class=n>proposal</span> <span class=n>is</span> <span class=n>not</span> <span class=n>voteable</span><span class=err>&#39;</span></span></span></code></pre></td></tr></table></div></div></div></div><h4 id=查询已经获取的票数>查询已经获取的票数</h4><div class=codeblock><header><span class=codeblock-lang>java</span>
+<button class=codeblock-copy data-id=codeblock-id-6 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-6 style=display:none>import com.baidu.xuper.api.Account;
+import com.baidu.xuper.api.Transaction;
+import com.baidu.xuper.api.XuperClient;
+import com.baidu.xuper.config.Config;
+import java.util.HashMap;
+import java.util.Map;
+public class Main {
+public static XuperClient client;
+public static void main(String[] args) {
+// 设置背书服务
+Config.setConfigPath("./conf/sdk.yaml");
+Account account = Account.getAccountFromFile("开放网络私钥目录","安全码");
+client = new XuperClient("39.156.69.83:37100");
+String contract = "campaign";
+String method = "queryVotes";
+Map&lt;String,String> params = new HashMap&lt;>();
+params.put("proposalId", "0");
+Transaction tx = client.queryEVMContract(account,contract, method, params);
+System.out.println(tx.getContractResponse().getBodyStr());
+}
+}
+// output
+[{"votes":"2"}]</code><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.Account</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.Transaction</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.XuperClient</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.config.Config</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.HashMap</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.Map</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Main</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=n>XuperClient</span> <span class=n>client</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 设置背书服务
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>Config</span><span class=o>.</span><span class=na>setConfigPath</span><span class=o>(</span><span class=s>&#34;./conf/sdk.yaml&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Account</span> <span class=n>account</span> <span class=o>=</span> <span class=n>Account</span><span class=o>.</span><span class=na>getAccountFromFile</span><span class=o>(</span><span class=s>&#34;开放网络私钥目录&#34;</span><span class=o>,</span><span class=s>&#34;安全码&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>client</span> <span class=o>=</span> <span class=k>new</span> <span class=n>XuperClient</span><span class=o>(</span><span class=s>&#34;39.156.69.83:37100&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>String</span> <span class=n>contract</span> <span class=o>=</span> <span class=s>&#34;campaign&#34;</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>String</span> <span class=n>method</span> <span class=o>=</span> <span class=s>&#34;queryVotes&#34;</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>Map</span><span class=o>&lt;</span><span class=n>String</span><span class=o>,</span><span class=n>String</span><span class=o>&gt;</span> <span class=n>params</span> <span class=o>=</span> <span class=k>new</span> <span class=n>HashMap</span><span class=o>&lt;&gt;();</span>
+</span></span><span class=line><span class=cl>        <span class=n>params</span><span class=o>.</span><span class=na>put</span><span class=o>(</span><span class=s>&#34;proposalId&#34;</span><span class=o>,</span> <span class=s>&#34;0&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Transaction</span> <span class=n>tx</span> <span class=o>=</span> <span class=n>client</span><span class=o>.</span><span class=na>queryEVMContract</span><span class=o>(</span><span class=n>account</span><span class=o>,</span><span class=n>contract</span><span class=o>,</span> <span class=n>method</span><span class=o>,</span> <span class=n>params</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>tx</span><span class=o>.</span><span class=na>getContractResponse</span><span class=o>().</span><span class=na>getBodyStr</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// output
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>[{</span><span class=s>&#34;votes&#34;</span><span class=o>:</span><span class=s>&#34;2&#34;</span><span class=o>}]</span></span></span></code></pre></td></tr></table></div></div></div></div><h4 id=检票>检票</h4><div class=codeblock><header><span class=codeblock-lang>java</span>
+<button class=codeblock-copy data-id=codeblock-id-7 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-7 style=display:none>import com.baidu.xuper.api.Account;
+import com.baidu.xuper.api.Transaction;
+import com.baidu.xuper.api.XuperClient;
+import com.baidu.xuper.config.Config;
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
+public class Main {
+public static XuperClient client;
+public static void main(String[] args) {
+// 设置背书服务
+Config.setConfigPath("./conf/sdk.yaml");
+Account account = Account.getAccountFromFile("开放网络私钥目录","安全码");
+client = new XuperClient("39.156.69.83:37100");
+String contract = "campaign";
+String method = "check";
+Map&lt;String,String> params = new HashMap&lt;>();
+params.put("proposalId", "0");
+Transaction tx = client.invokeEVMContract(account,contract, method, params, BigInteger.ZERO);
+System.out.println(tx.getContractResponse().getBodyStr());
+}
+}
+// output
+[{"status":"check successfuly, the proposal will be take effect"}]</code><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.Account</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.Transaction</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.XuperClient</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.config.Config</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.math.BigInteger</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.HashMap</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.Map</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Main</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=n>XuperClient</span> <span class=n>client</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 设置背书服务
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>Config</span><span class=o>.</span><span class=na>setConfigPath</span><span class=o>(</span><span class=s>&#34;./conf/sdk.yaml&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Account</span> <span class=n>account</span> <span class=o>=</span> <span class=n>Account</span><span class=o>.</span><span class=na>getAccountFromFile</span><span class=o>(</span><span class=s>&#34;开放网络私钥目录&#34;</span><span class=o>,</span><span class=s>&#34;安全码&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>client</span> <span class=o>=</span> <span class=k>new</span> <span class=n>XuperClient</span><span class=o>(</span><span class=s>&#34;39.156.69.83:37100&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>String</span> <span class=n>contract</span> <span class=o>=</span> <span class=s>&#34;campaign&#34;</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>String</span> <span class=n>method</span> <span class=o>=</span> <span class=s>&#34;check&#34;</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>Map</span><span class=o>&lt;</span><span class=n>String</span><span class=o>,</span><span class=n>String</span><span class=o>&gt;</span> <span class=n>params</span> <span class=o>=</span> <span class=k>new</span> <span class=n>HashMap</span><span class=o>&lt;&gt;();</span>
+</span></span><span class=line><span class=cl>        <span class=n>params</span><span class=o>.</span><span class=na>put</span><span class=o>(</span><span class=s>&#34;proposalId&#34;</span><span class=o>,</span> <span class=s>&#34;0&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Transaction</span> <span class=n>tx</span> <span class=o>=</span> <span class=n>client</span><span class=o>.</span><span class=na>invokeEVMContract</span><span class=o>(</span><span class=n>account</span><span class=o>,</span><span class=n>contract</span><span class=o>,</span> <span class=n>method</span><span class=o>,</span> <span class=n>params</span><span class=o>,</span> <span class=n>BigInteger</span><span class=o>.</span><span class=na>ZERO</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>tx</span><span class=o>.</span><span class=na>getContractResponse</span><span class=o>().</span><span class=na>getBodyStr</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// output
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>[{</span><span class=s>&#34;status&#34;</span><span class=o>:</span><span class=s>&#34;check successfuly, the proposal will be take effect&#34;</span><span class=o>}]</span></span></span></code></pre></td></tr></table></div></div></div></div><h4 id=查询学生会主席信息>查询学生会主席信息</h4><div class=codeblock><header><span class=codeblock-lang>java</span>
+<button class=codeblock-copy data-id=codeblock-id-8 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-8 style=display:none>import com.baidu.xuper.api.Account;
+import com.baidu.xuper.api.Transaction;
+import com.baidu.xuper.api.XuperClient;
+import com.baidu.xuper.config.Config;
+public class Main {
+public static XuperClient client;
+public static void main(String[] args) {
+// 设置背书服务
+Config.setConfigPath("./conf/sdk.yaml");
+Account account = Account.getAccountFromFile("开放网络私钥目录","安全码");
+client = new XuperClient("39.156.69.83:37100");
+String contract = "campaign";
+String method = "queryPresident";
+Transaction tx = client.queryEVMContract(account,contract, method, null);
+System.out.println(tx.getContractResponse().getBodyStr());
+}
+}
+// output
+[{"president":"alice"}]</code><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.Account</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.Transaction</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.XuperClient</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.config.Config</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Main</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=n>XuperClient</span> <span class=n>client</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 设置背书服务
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>Config</span><span class=o>.</span><span class=na>setConfigPath</span><span class=o>(</span><span class=s>&#34;./conf/sdk.yaml&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Account</span> <span class=n>account</span> <span class=o>=</span> <span class=n>Account</span><span class=o>.</span><span class=na>getAccountFromFile</span><span class=o>(</span><span class=s>&#34;开放网络私钥目录&#34;</span><span class=o>,</span><span class=s>&#34;安全码&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>client</span> <span class=o>=</span> <span class=k>new</span> <span class=n>XuperClient</span><span class=o>(</span><span class=s>&#34;39.156.69.83:37100&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>String</span> <span class=n>contract</span> <span class=o>=</span> <span class=s>&#34;campaign&#34;</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>String</span> <span class=n>method</span> <span class=o>=</span> <span class=s>&#34;queryPresident&#34;</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>Transaction</span> <span class=n>tx</span> <span class=o>=</span> <span class=n>client</span><span class=o>.</span><span class=na>queryEVMContract</span><span class=o>(</span><span class=n>account</span><span class=o>,</span><span class=n>contract</span><span class=o>,</span> <span class=n>method</span><span class=o>,</span> <span class=kc>null</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>tx</span><span class=o>.</span><span class=na>getContractResponse</span><span class=o>().</span><span class=na>getBodyStr</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// output
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>[{</span><span class=s>&#34;president&#34;</span><span class=o>:</span><span class=s>&#34;alice&#34;</span><span class=o>}]</span></span></span></code></pre></td></tr></table></div></div></div></div><h4 id=查询候选人信息>查询候选人信息</h4><div class=codeblock><header><span class=codeblock-lang>java</span>
+<button class=codeblock-copy data-id=codeblock-id-9 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-9 style=display:none>import com.baidu.xuper.api.Account;
+import com.baidu.xuper.api.Transaction;
+import com.baidu.xuper.api.XuperClient;
+import com.baidu.xuper.config.Config;
+import java.util.HashMap;
+import java.util.Map;
+public class Main {
+public static XuperClient client;
+public static void main(String[] args) {
+// 设置背书服务
+Config.setConfigPath("./conf/sdk.yaml");
+Account account = Account.getAccountFromFile("开放网络私钥目录","安全码");
+client = new XuperClient("39.156.69.83:37100");
+String contract = "campaign";
+String method = "queryCandidate";
+Map&lt;String,String> params = new HashMap&lt;>();
+params.put("proposalId", "0");
+Transaction tx = client.queryEVMContract(account,contract, method, params);
+System.out.println(tx.getContractResponse().getBodyStr());
+}
+}
+// output
+[{"candidate":"alice"}]</code><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.Account</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.Transaction</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.XuperClient</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.config.Config</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.HashMap</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.Map</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Main</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=n>XuperClient</span> <span class=n>client</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 设置背书服务
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>Config</span><span class=o>.</span><span class=na>setConfigPath</span><span class=o>(</span><span class=s>&#34;./conf/sdk.yaml&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Account</span> <span class=n>account</span> <span class=o>=</span> <span class=n>Account</span><span class=o>.</span><span class=na>getAccountFromFile</span><span class=o>(</span><span class=s>&#34;开放网络私钥目录&#34;</span><span class=o>,</span><span class=s>&#34;安全码&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>client</span> <span class=o>=</span> <span class=k>new</span> <span class=n>XuperClient</span><span class=o>(</span><span class=s>&#34;39.156.69.83:37100&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>String</span> <span class=n>contract</span> <span class=o>=</span> <span class=s>&#34;campaign&#34;</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>String</span> <span class=n>method</span> <span class=o>=</span> <span class=s>&#34;queryCandidate&#34;</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>Map</span><span class=o>&lt;</span><span class=n>String</span><span class=o>,</span><span class=n>String</span><span class=o>&gt;</span> <span class=n>params</span> <span class=o>=</span> <span class=k>new</span> <span class=n>HashMap</span><span class=o>&lt;&gt;();</span>
+</span></span><span class=line><span class=cl>        <span class=n>params</span><span class=o>.</span><span class=na>put</span><span class=o>(</span><span class=s>&#34;proposalId&#34;</span><span class=o>,</span> <span class=s>&#34;0&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Transaction</span> <span class=n>tx</span> <span class=o>=</span> <span class=n>client</span><span class=o>.</span><span class=na>queryEVMContract</span><span class=o>(</span><span class=n>account</span><span class=o>,</span><span class=n>contract</span><span class=o>,</span> <span class=n>method</span><span class=o>,</span> <span class=n>params</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>tx</span><span class=o>.</span><span class=na>getContractResponse</span><span class=o>().</span><span class=na>getBodyStr</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// output
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>[{</span><span class=s>&#34;candidate&#34;</span><span class=o>:</span><span class=s>&#34;alice&#34;</span><span class=o>}]</span></span></span></code></pre></td></tr></table></div></div></div></div><h4 id=创建新一轮提案>创建新一轮提案</h4><div class=codeblock><header><span class=codeblock-lang>java</span>
+<button class=codeblock-copy data-id=codeblock-id-10 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-10 style=display:none>import com.baidu.xuper.api.Account;
+import com.baidu.xuper.api.Transaction;
+import com.baidu.xuper.api.XuperClient;
+import com.baidu.xuper.config.Config;
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
+public class Main {
+public static XuperClient client;
+public static void main(String[] args) {
+// 设置背书服务
+Config.setConfigPath("./conf/sdk.yaml");
+Account account = Account.getAccountFromFile("开放网络私钥目录","安全码");
+client = new XuperClient("39.156.69.83:37100");
+String contract = "campaign";
+String method = "propose";
+Map&lt;String,String> params = new HashMap&lt;>();
+params.put("candidate", "bob");
+params.put("target", "3");
+Transaction tx = client.invokeEVMContract(account,contract, method, params, BigInteger.ZERO);
+System.out.println(tx.getContractResponse().getBodyStr());
+}
+}
+// output
+[{"proposalId":"1"}]</code><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.Account</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.Transaction</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.api.XuperClient</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>com.baidu.xuper.config.Config</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.math.BigInteger</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.HashMap</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.Map</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Main</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=n>XuperClient</span> <span class=n>client</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 设置背书服务
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>Config</span><span class=o>.</span><span class=na>setConfigPath</span><span class=o>(</span><span class=s>&#34;./conf/sdk.yaml&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Account</span> <span class=n>account</span> <span class=o>=</span> <span class=n>Account</span><span class=o>.</span><span class=na>getAccountFromFile</span><span class=o>(</span><span class=s>&#34;开放网络私钥目录&#34;</span><span class=o>,</span><span class=s>&#34;安全码&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>client</span> <span class=o>=</span> <span class=k>new</span> <span class=n>XuperClient</span><span class=o>(</span><span class=s>&#34;39.156.69.83:37100&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>String</span> <span class=n>contract</span> <span class=o>=</span> <span class=s>&#34;campaign&#34;</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>String</span> <span class=n>method</span> <span class=o>=</span> <span class=s>&#34;propose&#34;</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>Map</span><span class=o>&lt;</span><span class=n>String</span><span class=o>,</span><span class=n>String</span><span class=o>&gt;</span> <span class=n>params</span> <span class=o>=</span> <span class=k>new</span> <span class=n>HashMap</span><span class=o>&lt;&gt;();</span>
+</span></span><span class=line><span class=cl>        <span class=n>params</span><span class=o>.</span><span class=na>put</span><span class=o>(</span><span class=s>&#34;candidate&#34;</span><span class=o>,</span> <span class=s>&#34;bob&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>params</span><span class=o>.</span><span class=na>put</span><span class=o>(</span><span class=s>&#34;target&#34;</span><span class=o>,</span> <span class=s>&#34;3&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Transaction</span> <span class=n>tx</span> <span class=o>=</span> <span class=n>client</span><span class=o>.</span><span class=na>invokeEVMContract</span><span class=o>(</span><span class=n>account</span><span class=o>,</span><span class=n>contract</span><span class=o>,</span> <span class=n>method</span><span class=o>,</span> <span class=n>params</span><span class=o>,</span> <span class=n>BigInteger</span><span class=o>.</span><span class=na>ZERO</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>tx</span><span class=o>.</span><span class=na>getContractResponse</span><span class=o>().</span><span class=na>getBodyStr</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// output
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>[{</span><span class=s>&#34;proposalId&#34;</span><span class=o>:</span><span class=s>&#34;1&#34;</span><span class=o>}]</span></span></span></code></pre></td></tr></table></div></div></div></div></section><footer class=article-footer><section class=article-tags><a href=/tags/solidity/>Solidity</a></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css integrity="sha256-J+iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js integrity="sha256-InsNdER1b2xUewP+pKCUJpkhiqwHgqiPXDlIk7GzBu4=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI=" crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{renderMathInElement(document.querySelector(`.article-content`),{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/erc20/><div class=article-details><h2 class=article-title>ERC20合约</h2></div></a></article><article><a href=/p/erc721/><div class=article-details><h2 class=article-title>ERC721合约</h2></div></a></article><article class=has-image><a href=/p/shortcontent/><div class=article-image><img src=/p/shortcontent/header.bae5a6003c1363eb332de83ed88ba887_hu58eb6555178a77861c10495595dbf0eb_18332_250x150_fill_q75_box_smart1.jpg width=250 height=150 loading=lazy alt="Featured image of post 短内容存证合约" data-key=shortContent data-hash="md5-uuWmADwTY+szLeg+2Iuohw=="></div><div class=article-details><h2 class=article-title>短内容存证合约</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
+2020 -
+2023 Laertes</section><section class=powerby>山外风雨三尺剑，有事提剑下山去<br>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=4.0.0-alpha.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@5.2.7/dist/photoswipe.css integrity="sha256-olf9rfn3AG8zR6lkPXkN3PZq63z8tElx7Ela6T4eklo=" crossorigin=anonymous><script type=module>
+    import StackGallery from '\/ts\/gallery.js';
+    import PhotoSwipeLightbox from 'https://cdn.jsdelivr.net/npm/photoswipe@5.2.7/dist/photoswipe-lightbox.esm.min.js';
+    
+    console.log(StackGallery)
+    StackGallery(document.querySelector('.article-content'));
+
+    const lightbox = new PhotoSwipeLightbox({
+        gallery: '.article-content',
+        children: '.gallery-image a',
+        pswpModule: () => import('https://cdn.jsdelivr.net/npm/photoswipe@5.2.7/dist/photoswipe.esm.min.js')
+    });
+    lightbox.init();
+</script></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><ol><li><a href=#合约介绍>合约介绍</a><ol><li><a href=#场景介绍>场景介绍</a></li><li><a href=#流程介绍>流程介绍</a></li><li><a href=#功能介绍>功能介绍</a></li></ol></li><li><a href=#合约设计>合约设计</a></li><li><a href=#合约部署>合约部署</a><ol><li><a href=#编译>编译</a></li><li><a href=#部署>部署</a></li></ol></li><li><a href=#合约调用>合约调用</a><ol><li><a href=#发起提案>发起提案</a></li><li><a href=#查询提案状态>查询提案状态</a></li><li><a href=#投票>投票</a></li><li><a href=#查询已经获取的票数>查询已经获取的票数</a></li><li><a href=#检票>检票</a></li><li><a href=#查询学生会主席信息>查询学生会主席信息</a></li><li><a href=#查询候选人信息>查询候选人信息</a></li><li><a href=#创建新一轮提案>创建新一轮提案</a></li></ol></li></ol></li></ol></nav></div></section></aside></div><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

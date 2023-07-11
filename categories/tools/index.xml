@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tools on Laertes</title><link>https://superlitian.github.io/categories/tools/</link><description>Recent content in Tools on Laertes</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 12 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://superlitian.github.io/categories/tools/index.xml" rel="self" type="application/rss+xml"/><item><title>🌏️ 实用的工具类网站</title><link>https://superlitian.github.io/p/site/</link><pubDate>Wed, 12 Oct 2022 00:00:00 +0000</pubDate><guid>https://superlitian.github.io/p/site/</guid><description>&lt;h3 id="-实用的工具类网站">🌏️ 实用的工具类网站&lt;/h3>
+&lt;p>所有网站全部为免费，部分网站可能需要翻墙&lt;/p>
+&lt;h4 id="-removebg">🇺🇸 removebg&lt;/h4>
+&lt;ul>
+&lt;li>介绍：删除图像背景&lt;/li>
+&lt;li>官网：https://www.remove.bg/zh&lt;/li>
+&lt;/ul>
+&lt;h4 id="-天空之城">🇨🇳 天空之城&lt;/h4>
+&lt;ul>
+&lt;li>介绍：全球航拍爱好者和专业摄影师的作品社区&lt;/li>
+&lt;li>官网：https://www.skypixel.com/&lt;/li>
+&lt;/ul>
+&lt;h4 id="-幽灵疾步">🇨🇳 幽灵疾步&lt;/h4>
+&lt;ul>
+&lt;li>介绍：专一的英雄联盟内容聚合&lt;/li>
+&lt;li>官网：https://www.ghostoact.com/&lt;/li>
+&lt;/ul>
+&lt;h4 id="-cloudconvert">🇩🇪 CloudConvert&lt;/h4>
+&lt;ul>
+&lt;li>介绍：图片文件转换，可以转换为icon等&lt;/li>
+&lt;li>官网：https://cloudconvert.com/&lt;/li>
+&lt;/ul>
+&lt;h4 id="-m3ub-downloader">🇨🇳 m3ub downloader&lt;/h4>
+&lt;ul>
+&lt;li>介绍：m3u8 视频在线提取工具&lt;/li>
+&lt;li>官网：http://blog.luckly-mjw.cn/tool-show/m3u8-downloader/index.html&lt;/li>
+&lt;/ul>
+&lt;h4 id="-zamzar">🇺🇸 Zamzar&lt;/h4>
+&lt;ul>
+&lt;li>介绍：视频转换器、音频转换器、图像转换器、电子书转换器&lt;/li>
+&lt;li>官网：https://www.zamzar.com/&lt;/li>
+&lt;/ul>
+&lt;h4 id="-catnet">🇨🇳 CatNet&lt;/h4>
+&lt;ul>
+&lt;li>介绍：代理平台&lt;/li>
+&lt;li>官网：https://dash.catnet.uk/&lt;/li>
+&lt;/ul>
+&lt;h4 id="-emojiall">🇨🇳 EmojiALL&lt;/h4>
+&lt;ul>
+&lt;li>介绍：Emoji 词典&lt;/li>
+&lt;li>官网：https://www.emojiall.com/&lt;/li>
+&lt;/ul></description></item><item><title>📃 开源代码贡献方法</title><link>https://superlitian.github.io/p/pr/</link><pubDate>Wed, 12 Oct 2022 00:00:00 +0000</pubDate><guid>https://superlitian.github.io/p/pr/</guid><description>&lt;h3 id="-开源代码贡献指南">🌼 开源代码贡献指南&lt;/h3>
+&lt;h4 id="-fork-代码">🌿 Fork 代码&lt;/h4>
+&lt;p>访问自己想要贡献的代码库，然后fork代码到自己的代码仓库。
+&lt;img src="https://superlitian.github.io/p/pr/fork.jpg"
+width="646"
+height="65"
+srcset="https://superlitian.github.io/p/pr/fork_huc49d46135795c4c8c1334200476de3cb_11976_480x0_resize_q75_box.jpg 480w, https://superlitian.github.io/p/pr/fork_huc49d46135795c4c8c1334200476de3cb_11976_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="fork指南"
+class="gallery-image"
+data-flex-grow="993"
+data-flex-basis="2385px"
+>&lt;/p>
+&lt;h4 id="-clone-代码到本地">🪁 Clone 代码到本地&lt;/h4>
+&lt;p>假设fork完之后的代码仓库路径为 🔗 &lt;!-- raw HTML omitted -->&lt;a class="link" href="mailto:git@github.com" >git@github.com&lt;/a>:uaanaa/xuperchain.git&lt;!-- raw HTML omitted -->&lt;/p>
+&lt;div class="codeblock">
+&lt;header>
+&lt;span class="codeblock-lang">shell&lt;/span>
+&lt;button
+class="codeblock-copy"
+data-id="codeblock-id-0"
+data-copied-text="Copied!"
+>
+Copy
+&lt;/button>
+&lt;/header>
+&lt;code id="codeblock-id-0" style="display:none;">git clone git@github.com:uaanaa/xuperchain.git&lt;/code>&lt;div class="">&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">git clone git@github.com:uaanaa/xuperchain.git&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/div>&lt;/div>
+&lt;p>克隆到本地之后设置一个 &lt;strong>upstream&lt;/strong> 的 &lt;strong>remote&lt;/strong> 地址，方便我们同步原始仓库地址的更新&lt;/p>
+&lt;div class="codeblock">
+&lt;header>
+&lt;span class="codeblock-lang">shell&lt;/span>
+&lt;button
+class="codeblock-copy"
+data-id="codeblock-id-1"
+data-copied-text="Copied!"
+>
+Copy
+&lt;/button>
+&lt;/header>
+&lt;code id="codeblock-id-1" style="display:none;">git remote add upstream https://github.com/xuperchain/xuperchain.git&lt;/code>&lt;div class="">&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">git remote add upstream https://github.com/xuperchain/xuperchain.git&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/div>&lt;/div>
+&lt;h4 id="-同步代码建立分支">♎ 同步代码&amp;amp;建立分支&lt;/h4>
+&lt;p>每次要提交PR的时候都要 &lt;strong>新建&lt;/strong> 一个分支，这样可以同时开发多个feature，分支基于 &lt;strong>upstream&lt;/strong> 的 &lt;strong>master&lt;/strong> 建立&lt;/p>
+&lt;div class="codeblock">
+&lt;header>
+&lt;span class="codeblock-lang">shell&lt;/span>
+&lt;button
+class="codeblock-copy"
+data-id="codeblock-id-2"
+data-copied-text="Copied!"
+>
+Copy
+&lt;/button>
+&lt;/header>
+&lt;code id="codeblock-id-2" style="display:none;"># 拉取上游的最新代码
+git fetch upstream
+# 建立新分支
+git checkout -b new_feature upstream/master&lt;/code>&lt;div class="">&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 拉取上游的最新代码&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git fetch upstream
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 建立新分支&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git checkout -b new_feature upstream/master&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/div>&lt;/div>
+&lt;h4 id="-提交代码">🟢 提交代码&lt;/h4>
+&lt;p>当我们的代码写完之后就可以提交了，注意我们这里提交的remote是 origin，也就是自己的代码仓库&lt;/p>
+&lt;div class="codeblock">
+&lt;header>
+&lt;span class="codeblock-lang">shell&lt;/span>
+&lt;button
+class="codeblock-copy"
+data-id="codeblock-id-3"
+data-copied-text="Copied!"
+>
+Copy
+&lt;/button>
+&lt;/header>
+&lt;code id="codeblock-id-3" style="display:none;">git push origin new_feature
+Counting objects: 3, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 286 bytes | 286.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+remote:
+remote: Create a pull request for &amp;#39;new_feature&amp;#39; on GitHub by visiting:
+remote: https://github.com/uaanaa/xuperunion/pull/new/new_feature
+remote:
+To https://github.com/uaanaa/xuperunion.git
+* [new branch] new_feature -&amp;gt; new_feature&lt;/code>&lt;div class="">&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">git push origin new_feature
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Counting objects: 3, &lt;span class="k">done&lt;/span>.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Delta compression using up to &lt;span class="m">2&lt;/span> threads.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Compressing objects: 100% &lt;span class="o">(&lt;/span>3/3&lt;span class="o">)&lt;/span>, &lt;span class="k">done&lt;/span>.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Writing objects: 100% &lt;span class="o">(&lt;/span>3/3&lt;span class="o">)&lt;/span>, &lt;span class="m">286&lt;/span> bytes &lt;span class="p">|&lt;/span> 286.00 KiB/s, &lt;span class="k">done&lt;/span>.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Total &lt;span class="m">3&lt;/span> &lt;span class="o">(&lt;/span>delta 2&lt;span class="o">)&lt;/span>, reused &lt;span class="m">0&lt;/span> &lt;span class="o">(&lt;/span>delta 0&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">remote: Resolving deltas: 100% &lt;span class="o">(&lt;/span>2/2&lt;span class="o">)&lt;/span>, completed with &lt;span class="m">2&lt;/span> &lt;span class="nb">local&lt;/span> objects.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">remote:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">remote: Create a pull request &lt;span class="k">for&lt;/span> &lt;span class="s1">&amp;#39;new_feature&amp;#39;&lt;/span> on GitHub by visiting:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">remote: https://github.com/uaanaa/xuperunion/pull/new/new_feature
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">remote:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">To https://github.com/uaanaa/xuperunion.git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">* &lt;span class="o">[&lt;/span>new branch&lt;span class="o">]&lt;/span> new_feature -&amp;gt; new_feature&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/div>&lt;/div>
+&lt;h4 id="-创建pr">🇨🇳 创建PR&lt;/h4>
+&lt;p>提交完之后，一般有个类似 &lt;a class="link" href="https://github.com/uaanaa/xuperunion/pull/new/new_feature" target="_blank" rel="noopener"
+>https://github.com/uaanaa/xuperunion/pull/new/new_feature&lt;/a> 这样的地址，在浏览器打开这个地址就跳转到创建PR的页面进行提交即可。&lt;/p></description></item><item><title>🧰 git 忽略大小写问题</title><link>https://superlitian.github.io/p/git/</link><pubDate>Wed, 12 Oct 2022 00:00:00 +0000</pubDate><guid>https://superlitian.github.io/p/git/</guid><description>&lt;h3 id="-git-检查大小写不敏感">🔴 git 检查大小写不敏感&lt;/h3>
+&lt;p>今天需要将项目一个文件名首字母从小写改为大写，改好之后发现 &lt;strong>git status&lt;/strong> 并没有检查到更改。&lt;/p>
+&lt;h3 id="-原因">🟡 原因&lt;/h3>
+&lt;p>对于 windows 和 macOS 用户，每次 &lt;strong>git clone&lt;/strong> 之后，都在该项目的 📁 &lt;strong>.git/config&lt;/strong> 文件中设置了 &lt;strong>core.ignorecase = true&lt;/strong>&lt;/p>
+&lt;h3 id="-解决">🟢 解决&lt;/h3>
+&lt;p>在终端执行以下命令，将忽略大小写改为false&lt;/p>
+&lt;div class="codeblock">
+&lt;header>
+&lt;span class="codeblock-lang">shell&lt;/span>
+&lt;button
+class="codeblock-copy"
+data-id="codeblock-id-0"
+data-copied-text="Copied!"
+>
+Copy
+&lt;/button>
+&lt;/header>
+&lt;code id="codeblock-id-0" style="display:none;">git config core.ignorecase false&lt;/code>&lt;div class="">&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">git config core.ignorecase false&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/div>&lt;/div></description></item></channel></rss>

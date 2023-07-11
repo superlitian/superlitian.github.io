@@ -1,0 +1,229 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="基于xuperchain实现短内容存证EVM合约"><title>短内容存证合约</title><link rel=canonical href=https://superlitian.github.io/p/shortcontent/><link rel=stylesheet href=/scss/style.min.2a426798c147941971a3556278c8cfb14775867d8c34a1f67a6827752a1b4bd5.css><meta property="og:title" content="短内容存证合约"><meta property="og:description" content="基于xuperchain实现短内容存证EVM合约"><meta property="og:url" content="https://superlitian.github.io/p/shortcontent/"><meta property="og:site_name" content="Laertes"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="Solidity"><meta property="article:published_time" content="2022-09-28T00:00:00+00:00"><meta property="article:modified_time" content="2022-09-28T00:00:00+00:00"><meta property="og:image" content="https://superlitian.github.io/p/shortcontent/header.jpg"><meta name=twitter:title content="短内容存证合约"><meta name=twitter:description content="基于xuperchain实现短内容存证EVM合约"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://superlitian.github.io/p/shortcontent/header.jpg"><link rel="shortcut icon" href=/favicon.ico></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/avatar_hufe0ee12878b7caa9845abd9976ff67a8_90270_300x0_resize_q75_box.jpg width=300 height=300 class=site-logo loading=lazy alt=Avatar></a>
+<span class=emoji>😩</span></figure><div class=site-meta><h1 class=site-name><a href=/>Laertes</a></h1><h2 class=site-description>想找一份稳定的工作。</h2></div></header><ol class=social-menu><li><a href=https://github.com/superlitian target=_blank title=GitHub><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/shortcontent/><img src=/p/shortcontent/header_hu58eb6555178a77861c10495595dbf0eb_18332_800x0_resize_q75_box.jpg srcset="/p/shortcontent/header_hu58eb6555178a77861c10495595dbf0eb_18332_800x0_resize_q75_box.jpg 800w, /p/shortcontent/header_hu58eb6555178a77861c10495595dbf0eb_18332_1600x0_resize_q75_box.jpg 1600w" width=800 height=445 loading=lazy alt="Featured image of post 短内容存证合约"></a></div><div class=article-details><header class=article-category><a href=/categories/contract/>Contract</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/shortcontent/>短内容存证合约</a></h2><h3 class=article-subtitle>基于xuperchain实现短内容存证EVM合约</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Sep 28, 2022</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 3 分钟</time></div></footer></div></header><section class=article-content><h3 id=short_content-合约设计>Short_content 合约设计</h3><h4 id=查询逻辑>查询逻辑</h4><ul><li>根据 userid 查询，结果为一个集合。集合内容为完整的存证信息：标题、类别、内容。</li><li>根据 userid + title 查询，结果为一个字符串。内容为一个完整的存证信息：标题、类别、内容。标题 = title。</li><li>根据 userid + topic 查询，结果为一个集合。内容为完整的存证信息：标题、类别、内容。区别在于所有类别 = topic。</li></ul><h4 id=怎么设计>怎么设计</h4><p><strong>userid</strong></p><p>userid 需要对应一个集合。对应哪个集合？</p><p>Mapping(userid => ?[]) useridToContent</p><p><strong>topic</strong></p><p>topic 也需要对应一个集合，但是索引键为 userid + topic， 怎么设计？</p><p>Mapping(userid+topic => ?[]) topics</p><p><strong>title</strong></p><p>title 不需要集合，但是表现形式应该为： userid + title = content 的所有内容。</p><p>Mapping(userid + title => ?) Article</p><p>引入一个结构体能解决这个问题吗？</p><div class=codeblock><header><span class=codeblock-lang>solidity</span>
+<button class=codeblock-copy data-id=codeblock-id-0 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-0 style=display:none>// 该结构体是否要包含userid? 先不包含写一下看
+struct Article{
+string title;
+string topic;
+string content;
+}
+// userid 怎么与 Article 对应？
+mapping(string => Article[]) allArticle ?
+// 那么create 怎么操作？
+function create(string userid, string title, string topic, string content){
+Article a = Article{
+title: title,
+topic: topic,
+content: conten
+};
+allArtcile[userid].push(a);
+// 这样看起来没问题， userid 到 article 的映射可以解决，但是怎么查询呢？ return allArtcile[userid] ? 这样返回的是结构体数组，甚至不是stirng 数组， evm 支持吗？
+// todo: 确认evm 是否支持 struct[] 返回，以及 xchain 是否支持。
+}</code><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-solidity data-lang=solidity><span class=line><span class=cl><span class=c1>// 该结构体是否要包含userid? 先不包含写一下看
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>struct</span> <span class=nc>Article</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kt>string</span> <span class=n>title</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kt>string</span> <span class=n>topic</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kt>string</span> <span class=n>content</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1>// userid 怎么与 Article 对应？
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=kd>mapping</span><span class=p>(</span><span class=kt>string</span> <span class=o>=&gt;</span> <span class=n>Article</span><span class=p>[])</span> <span class=n>allArticle</span> <span class=o>?</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 那么create 怎么操作？
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>function</span> <span class=nf>create</span><span class=p>(</span><span class=kt>string</span> <span class=n>userid</span><span class=p>,</span> <span class=kt>string</span> <span class=n>title</span><span class=p>,</span> <span class=kt>string</span> <span class=n>topic</span><span class=p>,</span> <span class=kt>string</span> <span class=n>content</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>	<span class=n>Article</span> <span class=n>a</span> <span class=o>=</span> <span class=n>Article</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=n>title</span><span class=o>:</span> <span class=n>title</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=n>topic</span><span class=o>:</span> <span class=n>topic</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=n>content</span><span class=o>:</span> <span class=n>conten</span>
+</span></span><span class=line><span class=cl>	<span class=p>};</span>
+</span></span><span class=line><span class=cl>	<span class=n>allArtcile</span><span class=p>[</span><span class=n>userid</span><span class=p>].</span><span class=n>push</span><span class=p>(</span><span class=n>a</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 这样看起来没问题， userid 到 article 的映射可以解决，但是怎么查询呢？ return allArtcile[userid] ? 这样返回的是结构体数组，甚至不是stirng 数组， evm 支持吗？
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// todo: 确认evm 是否支持 struct[] 返回，以及 xchain 是否支持。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span></span></span></code></pre></td></tr></table></div></div></div></div><p>Evm 是支持这样写的，但注意要添加 <strong>pragma experimental ABIEncoderV2;</strong></p><p><img src=/p/shortcontent/image-20220919155719816.png width=2404 height=1040 srcset="/p/shortcontent/image-20220919155719816_hu38a4e4ede7fdbef58b945a618914f7c3_334068_480x0_resize_box_3.png 480w, /p/shortcontent/image-20220919155719816_hu38a4e4ede7fdbef58b945a618914f7c3_334068_1024x0_resize_box_3.png 1024w" loading=lazy alt="remix 测试截图" class=gallery-image data-flex-grow=231 data-flex-basis=554px></p><p>那么此合约遇到的问题便迎刃而解，但是需要做循环匹配topic title 这些，总的来说，这个合约不是非常合理</p><p>为了更合理的设计合约，决定用多个 mapping 来进行匹配</p><h4 id=合约实现>合约实现</h4><div class=codeblock><header><span class=codeblock-lang>solidity</span>
+<button class=codeblock-copy data-id=codeblock-id-1 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-1 style=display:none>// SPDX-License-Identifier: GPL-3.0
+pragma solidity ^0.7.4;
+pragma experimental ABIEncoderV2;
+contract ShortContent{
+// userid 对应一个集合， userid => title+topic+content
+mapping(string => string[]) userArticles;
+// userid + topic 对应一个集合 userid + topic => title + topic + content
+mapping(string => string[]) utopicArticles;
+// userid + title 对应一篇文章 userid + title => title + topic + content
+mapping(string => string) utitleArticles;
+// 长度限制
+uint256 maxTopicLen;
+uint256 maxTitleLen;
+uint256 maxContentLen;
+constructor(){
+maxTopicLen = 36;
+maxTitleLen = 100;
+maxContentLen = 3000;
+}
+function storeShortContent(string memory userid, string memory title, string memory topic, string memory content) external returns (string memory message) {
+// 长度检验
+require(bytes(title).length &lt; maxTitleLen, "this title is too long");
+require(bytes(topic).length &lt; maxTopicLen, "this topic is too long");
+require(bytes(content).length &lt; maxContentLen, "this content is too long");
+// 添加映射
+string memory result = string(abi.encodePacked(userid,"/",title,"/",topic,"/",content));
+string memory utopic = string(abi.encodePacked(userid,topic));
+string memory utitle = string(abi.encodePacked(userid,title));
+userArticles[userid].push(result);
+utopicArticles[utopic].push(result);
+utitleArticles[utitle] = result;
+return "store short content success";
+}
+function queryByUser(string memory userid) public view returns(string[] memory articles){
+return userArticles[userid];
+}
+function queryByTopic(string memory userid, string memory topic) public view returns(string[] memory articles){
+string memory utopic = string(abi.encodePacked(userid,topic));
+return utopicArticles[utopic];
+}
+function queryByTitle(string memory userid, string memory title) public view returns(string memory articles){
+string memory utitle = string(abi.encodePacked(userid,title));
+return utitleArticles[utitle];
+}
+}</code><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-solidity data-lang=solidity><span class=line><span class=cl><span class=c1>// SPDX-License-Identifier: GPL-3.0
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=k>pragma solidity</span> <span class=o>^</span><span class=mi>0</span><span class=p>.</span><span class=mi>7</span><span class=p>.</span><span class=mi>4</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>pragma experimental</span> <span class=n>ABIEncoderV2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>contract</span> <span class=nc>ShortContent</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// userid 对应一个集合， userid =&gt; title+topic+content
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kd>mapping</span><span class=p>(</span><span class=kt>string</span> <span class=o>=&gt;</span> <span class=kt>string</span><span class=p>[])</span> <span class=n>userArticles</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// userid + topic 对应一个集合 userid + topic =&gt; title + topic + content
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kd>mapping</span><span class=p>(</span><span class=kt>string</span> <span class=o>=&gt;</span> <span class=kt>string</span><span class=p>[])</span> <span class=n>utopicArticles</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// userid + title 对应一篇文章 userid + title =&gt; title + topic + content
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kd>mapping</span><span class=p>(</span><span class=kt>string</span> <span class=o>=&gt;</span> <span class=kt>string</span><span class=p>)</span> <span class=n>utitleArticles</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 长度限制
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kt>uint256</span> <span class=n>maxTopicLen</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kt>uint256</span> <span class=n>maxTitleLen</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kt>uint256</span> <span class=n>maxContentLen</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>constructor</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl>    <span class=n>maxTopicLen</span> <span class=o>=</span> <span class=mi>36</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>maxTitleLen</span> <span class=o>=</span> <span class=mi>100</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>maxContentLen</span> <span class=o>=</span> <span class=mi>3000</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  <span class=kd>function</span> <span class=nf>storeShortContent</span><span class=p>(</span><span class=kt>string</span> <span class=k>memory</span> <span class=n>userid</span><span class=p>,</span> <span class=kt>string</span> <span class=k>memory</span> <span class=n>title</span><span class=p>,</span> <span class=kt>string</span> <span class=k>memory</span> <span class=n>topic</span><span class=p>,</span> <span class=kt>string</span> <span class=k>memory</span> <span class=n>content</span><span class=p>)</span> <span class=k>external</span> <span class=k>returns</span> <span class=p>(</span><span class=kt>string</span> <span class=k>memory</span> <span class=n>message</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  	<span class=c1>// 长度检验
+</span></span></span><span class=line><span class=cl><span class=c1></span>  	<span class=nb>require</span><span class=p>(</span><span class=kt>bytes</span><span class=p>(</span><span class=n>title</span><span class=p>).</span><span class=n>length</span> <span class=o>&lt;</span> <span class=n>maxTitleLen</span><span class=p>,</span> <span class=s>&#34;this title is too long&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  	<span class=nb>require</span><span class=p>(</span><span class=kt>bytes</span><span class=p>(</span><span class=n>topic</span><span class=p>).</span><span class=n>length</span> <span class=o>&lt;</span> <span class=n>maxTopicLen</span><span class=p>,</span> <span class=s>&#34;this topic is too long&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  	<span class=nb>require</span><span class=p>(</span><span class=kt>bytes</span><span class=p>(</span><span class=n>content</span><span class=p>).</span><span class=n>length</span> <span class=o>&lt;</span> <span class=n>maxContentLen</span><span class=p>,</span> <span class=s>&#34;this content is too long&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  	<span class=c1>// 添加映射
+</span></span></span><span class=line><span class=cl><span class=c1></span>  	<span class=kt>string</span> <span class=k>memory</span> <span class=n>result</span> <span class=o>=</span> <span class=kt>string</span><span class=p>(</span><span class=nb>abi</span><span class=p>.</span><span class=nb>encodePacked</span><span class=p>(</span><span class=n>userid</span><span class=p>,</span><span class=s>&#34;/&#34;</span><span class=p>,</span><span class=n>title</span><span class=p>,</span><span class=s>&#34;/&#34;</span><span class=p>,</span><span class=n>topic</span><span class=p>,</span><span class=s>&#34;/&#34;</span><span class=p>,</span><span class=n>content</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>  	<span class=kt>string</span> <span class=k>memory</span> <span class=n>utopic</span> <span class=o>=</span> <span class=kt>string</span><span class=p>(</span><span class=nb>abi</span><span class=p>.</span><span class=nb>encodePacked</span><span class=p>(</span><span class=n>userid</span><span class=p>,</span><span class=n>topic</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>  	<span class=kt>string</span> <span class=k>memory</span> <span class=n>utitle</span> <span class=o>=</span> <span class=kt>string</span><span class=p>(</span><span class=nb>abi</span><span class=p>.</span><span class=nb>encodePacked</span><span class=p>(</span><span class=n>userid</span><span class=p>,</span><span class=n>title</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>  	<span class=n>userArticles</span><span class=p>[</span><span class=n>userid</span><span class=p>].</span><span class=n>push</span><span class=p>(</span><span class=n>result</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  	<span class=n>utopicArticles</span><span class=p>[</span><span class=n>utopic</span><span class=p>].</span><span class=n>push</span><span class=p>(</span><span class=n>result</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  	<span class=n>utitleArticles</span><span class=p>[</span><span class=n>utitle</span><span class=p>]</span> <span class=o>=</span> <span class=n>result</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  	<span class=k>return</span> <span class=s>&#34;store short content success&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  <span class=kd>function</span> <span class=nf>queryByUser</span><span class=p>(</span><span class=kt>string</span> <span class=k>memory</span> <span class=n>userid</span><span class=p>)</span> <span class=k>public</span> <span class=k>view</span> <span class=k>returns</span><span class=p>(</span><span class=kt>string</span><span class=p>[]</span> <span class=k>memory</span> <span class=n>articles</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>  	<span class=k>return</span> <span class=n>userArticles</span><span class=p>[</span><span class=n>userid</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  <span class=kd>function</span> <span class=nf>queryByTopic</span><span class=p>(</span><span class=kt>string</span> <span class=k>memory</span> <span class=n>userid</span><span class=p>,</span> <span class=kt>string</span> <span class=k>memory</span> <span class=n>topic</span><span class=p>)</span> <span class=k>public</span> <span class=k>view</span> <span class=k>returns</span><span class=p>(</span><span class=kt>string</span><span class=p>[]</span> <span class=k>memory</span> <span class=n>articles</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>  	<span class=kt>string</span> <span class=k>memory</span> <span class=n>utopic</span> <span class=o>=</span> <span class=kt>string</span><span class=p>(</span><span class=nb>abi</span><span class=p>.</span><span class=nb>encodePacked</span><span class=p>(</span><span class=n>userid</span><span class=p>,</span><span class=n>topic</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>  	<span class=k>return</span> <span class=n>utopicArticles</span><span class=p>[</span><span class=n>utopic</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  <span class=kd>function</span> <span class=nf>queryByTitle</span><span class=p>(</span><span class=kt>string</span> <span class=k>memory</span> <span class=n>userid</span><span class=p>,</span> <span class=kt>string</span> <span class=k>memory</span> <span class=n>title</span><span class=p>)</span> <span class=k>public</span> <span class=k>view</span> <span class=k>returns</span><span class=p>(</span><span class=kt>string</span> <span class=k>memory</span> <span class=n>articles</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>  	<span class=kt>string</span> <span class=k>memory</span> <span class=n>utitle</span> <span class=o>=</span> <span class=kt>string</span><span class=p>(</span><span class=nb>abi</span><span class=p>.</span><span class=nb>encodePacked</span><span class=p>(</span><span class=n>userid</span><span class=p>,</span><span class=n>title</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>  	<span class=k>return</span> <span class=n>utitleArticles</span><span class=p>[</span><span class=n>utitle</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div></div></div><h4 id=xchain测试>xchain测试</h4><blockquote><p>编译合约</p></blockquote><p><strong><code>solcjs --abi --bin ./short_content.sol -o build</code></strong></p><blockquote><p>测试存储</p></blockquote><p><img src=/p/shortcontent/image-20220919173857213.png width=2848 height=1030 srcset="/p/shortcontent/image-20220919173857213_hu98c66f98ad6d544b8714c0d82914382c_305556_480x0_resize_box_3.png 480w, /p/shortcontent/image-20220919173857213_hu98c66f98ad6d544b8714c0d82914382c_305556_1024x0_resize_box_3.png 1024w" loading=lazy alt="xuperchain 数据上链" class=gallery-image data-flex-grow=276 data-flex-basis=663px></p><blockquote><p>测试查询</p></blockquote><p><img src=/p/shortcontent/image-20220919174241440.png width=2746 height=914 srcset="/p/shortcontent/image-20220919174241440_huc4e17007a9be33517b4de3c215ffac69_291423_480x0_resize_box_3.png 480w, /p/shortcontent/image-20220919174241440_huc4e17007a9be33517b4de3c215ffac69_291423_1024x0_resize_box_3.png 1024w" loading=lazy alt="xuperchain 链上数据查询" class=gallery-image data-flex-grow=300 data-flex-basis=721px></p></section><footer class=article-footer><section class=article-tags><a href=/tags/solidity/>Solidity</a></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css integrity="sha256-J+iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js integrity="sha256-InsNdER1b2xUewP+pKCUJpkhiqwHgqiPXDlIk7GzBu4=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI=" crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{renderMathInElement(document.querySelector(`.article-content`),{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/erc20/><div class=article-details><h2 class=article-title>ERC20合约</h2></div></a></article><article><a href=/p/erc721/><div class=article-details><h2 class=article-title>ERC721合约</h2></div></a></article><article class=has-image><a href=/p/campaign/><div class=article-image><img src=/p/campaign/header.b54ef63caf3b07d0b3c66b809610bc6c_hud30b7d800d6a863e0643d87b3a87316b_148688_250x150_fill_q75_box_smart1.jpg width=250 height=150 loading=lazy alt="Featured image of post 提案投票合约" data-key=campaign data-hash="md5-tU72PK87B9CzxmuAlhC8bA=="></div><div class=article-details><h2 class=article-title>提案投票合约</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
+2020 -
+2023 Laertes</section><section class=powerby>山外风雨三尺剑，有事提剑下山去<br>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=4.0.0-alpha.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@5.2.7/dist/photoswipe.css integrity="sha256-olf9rfn3AG8zR6lkPXkN3PZq63z8tElx7Ela6T4eklo=" crossorigin=anonymous><script type=module>
+    import StackGallery from '\/ts\/gallery.js';
+    import PhotoSwipeLightbox from 'https://cdn.jsdelivr.net/npm/photoswipe@5.2.7/dist/photoswipe-lightbox.esm.min.js';
+    
+    console.log(StackGallery)
+    StackGallery(document.querySelector('.article-content'));
+
+    const lightbox = new PhotoSwipeLightbox({
+        gallery: '.article-content',
+        children: '.gallery-image a',
+        pswpModule: () => import('https://cdn.jsdelivr.net/npm/photoswipe@5.2.7/dist/photoswipe.esm.min.js')
+    });
+    lightbox.init();
+</script></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><ol><li><a href=#short_content-合约设计>Short_content 合约设计</a><ol><li><a href=#查询逻辑>查询逻辑</a></li><li><a href=#怎么设计>怎么设计</a></li><li><a href=#合约实现>合约实现</a></li><li><a href=#xchain测试>xchain测试</a></li></ol></li></ol></li></ol></nav></div></section></aside></div><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
