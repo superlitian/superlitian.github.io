@@ -5,3 +5,9 @@ languageName = "English"
 languagedirection = "ltr"
 title = "Laertes"
 weight = 1
+
+[zh-cn]
+languageName = "简体中文"
+languagedirection = "ltr"
+title = "李天"
+weight = 1
